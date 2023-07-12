@@ -1,0 +1,116 @@
+{% extends 'courses/base.html' %} 
+{% load static %}
+{% load courses_custom_tags %}
+
+{% block title %}
+Courses
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollBar.css' %}">
+
+{% endblock css %}
+
+{% block js %}
+
+<script src="{% static 'courses/js/course_page.js' %}"></script>
+
+{% endblock js %}
+{% block content %}
+
+<div class="container-float">
+            {{video.video_id}}
+
+  <div hidden>
+    <p class="display-">Course Page : {{course.name}}</p>
+    <p class="display-">Course Page : {{course.price}}</p>
+    <p class="display-">Course Page : {{course.discount}}</p>
+    <p class="display-">Course Page : {{course.description}}</p>
+    <p class="display-">Course Page : {{course.thumbnail}}</p>
+    <p class="display-">Course Page : {{course.video_set.all}}</p>
+    <p class="display-">Course Page : {{course.tag_set.all}}</p>
+    <p class="display-">Course Page : {{course.prerequisite_set.all}}</p>
+    <p class="display-">Course Page : {{course.learning_set.all}}</p>
+  </div>
+  <div>
+   <div class = "card p-3">
+     <div class="row">
+      <div class="col">
+        <div class="mx-auto">
+
+          <iframe id = "player" class='mx-auto'
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/{{video.video_id}}"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen autoplay = 'on'
+          ></iframe>
+        </div>
+      </div>
+      <div class="col-3">
+        <ul id='video_list' class="list-group overflow-y-scroll">
+          {% for video in course.video_set.all %}
+
+          <li class="list-group-item"><a href="?lecture={{video.serial_number}}">{{video}}</a></li>
+
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+   </div>
+
+    <div class="mt-3">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <p class="card-text">{{course.description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">Prerequisite : </h5>
+          <p class="card-text">
+            <ol>
+                {% for pre in course.prerequisite_set.all %}
+
+          <li >{{pre.description}}</li>
+
+          {% endfor %}
+            </ol>
+        </p>
+        </div>
+      </div>
+    </div>
+     <div class="mt-3">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">What you will learn :</h5>
+          <p class="card-text">
+            <ol>
+                {% for pre in course.learning_set.all %}
+
+          <li >{{pre.description}}</li>
+
+          {% endfor %}
+            </ol>
+        </p>
+        </div>
+      </div>
+    </div>
+    <br> 
+    <br>
+    <br>
+  </div>
+</div>
+</div>
+
+
+
+  {% endblock content %}
+
+  
+

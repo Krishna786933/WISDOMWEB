@@ -1,0 +1,66 @@
+
+{% extends 'courses/base.html' %}
+{% load courses_custom_tags %}
+
+{% block content %}
+
+
+<style>
+  .price{
+    font-size : 20px;
+  }
+</style>
+
+<div class="container-fluid">
+  <br>
+
+<div class="row">
+{% for x in course %}
+
+
+<div class="col mx-auto">
+  <div class="card mx-auto" style="width: 18rem;">
+  <img src="{{x.thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{x.name}}</h5>
+    <p class="card-text">
+      <span class='price'>
+        Save : {{x.discount}} % 
+        <br>
+      <del>₹{{x.price}}</del> &nbsp;
+      <span> ₹{% call_sellprice x.price x.discount %}</span>
+      </span> 
+    </p>
+  </div>
+
+  <div class="card-footer p-0">
+
+    <div class="row no-gutters">
+
+      <div class='col border'>
+      <a href="/check-out/{{x.slug}}" class="btn btn-light btn-block">Enroll Now</a>
+
+      </div>
+
+      <div class="col border">
+      <a href="/course/{{x.slug}}" class="btn btn-light btn-block">Show More</a>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+</div>
+
+{% endblock content %}

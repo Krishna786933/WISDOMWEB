@@ -1,0 +1,54 @@
+{% extends 'courses/base.html' %}
+{% load courses_custom_tags %}
+
+{% block title %}Login{% endblock title %}
+{% block content %}
+
+<div class="container">
+
+<br>
+
+{% if order is not None %}
+<h1>{{order}}</h1>
+<br> <br> <br>
+<h1>{{payment}}</h1>
+
+{% endif %}
+
+
+<br>
+<div class='row '>
+    <div class="col ml-auto">
+  <div class="card mx-auto" style="width: 18rem;">
+  <img src="{{course.thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{course.name}}</h5>
+    <p class="card-text">
+      <span class='price'>
+        Save : {{course.discount}} % 
+        <br>
+      <del>₹{{course.price}}</del> &nbsp;
+      <span> ₹{% call_sellprice course.price course.discount %}</span>
+      </span> 
+    </p>
+  </div>
+
+  
+
+
+</div>
+</div>
+<div class="col ">
+    <div>
+        <p style="font-size:35px;text-align:center">{{course.name}}</p>
+        <hr>
+        <p style="font-size:35px;text-align:center">Payable Amount : <b><span> ₹{% call_sellprice course.price course.discount %}</span></b> </p>
+        <a class="btn btn-light border" href="?action=create_payment">Continue to Payment</a>
+
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+
